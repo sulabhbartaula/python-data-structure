@@ -1,8 +1,11 @@
 """
 Description
+
 Given an array of integers arr and an integer k, create a boolean
 function that checks if there exists two elements in arr such that
 we get k when we add them together.
+
+using hashtable
 
 """
 
@@ -15,22 +18,20 @@ def main():
 
     print(isPairExist)
 
-#time complexity of function is O(n.logn)
+#time complexity of function is O(n)
 def findPair(arr,key):
 
-    #sorting array nlogn
-    arr.sort()
-    left = 0
-    right = len(arr) - 1
+    visited = {}
 
-    #traversing array is O(n)
-    while left < right:
-        if arr[left] + arr[right] == key:
+    #traversing through each element in array is O(n)
+    for element in arr:
+        #lookup in hashtable is constant O(1)
+        if visited.get(key - element):
             return True
-        elif arr[left] + arr[right] < key:
-            left += 1
         else:
-            right -= 1
+            #insertion in hashtable is constant O(1)
+            visited[element] = True
+
     return False
             
 
